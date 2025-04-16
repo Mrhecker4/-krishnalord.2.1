@@ -1,0 +1,174 @@
+# Re-create the ZIP file after code execution state reset
+
+html_content = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Full Masti TV - Official YouTube Channel Website. Comedy, Vlogs, Entertainment & More!">
+  <meta name="keywords" content="Full Masti TV, YouTube Channel, Comedy Videos, Entertainment, Vlogs">
+  <meta name="author" content="Full Masti TV">
+  <meta property="og:title" content="Full Masti TV - Official Website">
+  <meta property="og:description" content="Comedy, Vlogs, Entertainment & More! Watch now.">
+  <meta property="og:image" content="thumbnail.jpg">
+  <meta property="og:url" content="https://yourdomain.com">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>Full Masti TV - Official Website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background: #ff0055;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+    nav {
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav a {
+      text-decoration: none;
+      color: #ff0055;
+      font-weight: 600;
+    }
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #ff0055, #ffcc00);
+      color: white;
+    }
+    .hero h1 { font-size: 2.5rem; }
+    .hero p { font-size: 1.2rem; }
+    .hero button {
+      background: white;
+      color: #ff0055;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .video-section, .about, .gallery, .contact {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    iframe {
+      width: 100%;
+      max-width: 700px;
+      height: 400px;
+      border-radius: 10px;
+      border: none;
+    }
+    .gallery img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 10px;
+      margin: 10px;
+    }
+    form input, form textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    form button {
+      background: #ff0055;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Full Masti TV</h1>
+    <p>Comedy | Vlogs | Entertainment</p>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#videos">Videos</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section class="hero" id="home">
+    <h1>Welcome to Full Masti TV</h1>
+    <p>Watch latest comedy & entertainment videos now!</p>
+    <a href="https://www.youtube.com/@FullMastiTV" target="_blank">
+      <button>Subscribe Now</button>
+    </a>
+  </section>
+
+  <section class="video-section" id="videos">
+    <h2>Latest Video</h2>
+    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+  </section>
+
+  <section class="about" id="about">
+    <h2>About Us</h2>
+    <p>Full Masti TV is a YouTube channel dedicated to spreading laughter and fun through hilarious skits, vlogs, and entertaining content. Join us for weekly uploads and full masti!</p>
+  </section>
+
+  <section class="gallery" id="gallery">
+    <h2>Behind the Scenes</h2>
+    <img src="gallery1.jpg" alt="BTS 1">
+    <img src="gallery2.jpg" alt="BTS 2">
+    <img src="gallery3.jpg" alt="BTS 3">
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <form action="https://formspree.io/f/your-form-id" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Full Masti TV | All Rights Reserved</p>
+  </footer>
+</body>
+</html>
+"""
+
+from zipfile import ZipFile
+import os
+
+output_dir = "/mnt/data/fullmastitv_site"
+os.makedirs(output_dir, exist_ok=True)
+html_path = os.path.join(output_dir, "index.html")
+
+with open(html_path, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+zip_path = "/mnt/data/fullmastitv_site.zip"
+with ZipFile(zip_path, "w") as zipf:
+    zipf.write(html_path, arcname="index.html")
+
+zip_path
+  
